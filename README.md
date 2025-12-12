@@ -1,4 +1,3 @@
-# Fastest-Delivery-Dijkstra
 # Delivery Shortest Path – Dijkstra Algorithm
 
 تاسك تحليل خوارزميات -- أحمد عرفات محمد محمد -- سكشن 6 -- م/ندي السيد .  
