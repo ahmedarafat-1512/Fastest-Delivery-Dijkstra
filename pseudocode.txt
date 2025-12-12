@@ -1,0 +1,53 @@
+Algorithm Dijkstra(Graph, Start, End)
+    
+    Input:  Graph (adjacency list with weights), Start node, End node
+    Output: Shortest distance and the best path from Start to End
+
+    Begin
+        // 1. تهيئة المسافات
+        For each node in Graph
+            distance[node] ← ∞
+            parent[node]   ← NULL
+        End For
+        
+        distance[Start] ← 0
+        
+        // 2. إنشاء Priority Queue (Min-Heap)
+        Insert (0, Start) into PriorityQueue
+        
+        // 3. الحلقة الرئيسية
+        While PriorityQueue is not empty
+            current_dist ← minimum distance from PriorityQueue
+            current_node ← node with that distance
+            Remove current_node from PriorityQueue
+            
+            // لو وصلنا للعميل خلاص نوقف (اختياري بس حلو)
+            If current_node = End
+                Break
+            
+            // نفحص كل جيران النقطة الحالية
+            For each neighbor of current_node
+                new_dist ← current_dist + weight(current_node → neighbor)
+                
+                If new_dist < distance[neighbor]
+                    distance[neighbor] ← new_dist
+                    parent[neighbor]   ← current_node
+                    Insert/Update (new_dist, neighbor) in PriorityQueue
+                End If
+            End For
+        End While
+        
+        // 4. لو مفيش طريق للعميل
+        If distance[End] = ∞
+            Return "No path exists", []
+        
+        // 5. إعادة بناء المسار من النهاية للبداية
+        path ← empty list
+        current ← End
+        While current ≠ NULL
+            Add current to front of path
+            current ← parent[current]
+        End While
+        
+        Return distance[End], path
+    End Algorithm
